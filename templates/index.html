@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>FlaskCRUD App</h2>
+    {% if tasks %}
+    <table class="task-table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Added On</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.content }}</td>
+                <td>{{ task.created.strftime("%Y-%m-%d ") }}</td>
+                <td>
+                    <a href="/edit/{{ task.id }}">Edit</a> |
+
+                    
+                    <a href="/delete/{{ task.id }}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+    {% else %}
+    <p>There are no task Here...! Add here.</p>
+    {% endif %}
+
+<div class="task-actions">
+    <h2> </h2>
+    <form action="/" method="POST">
+        <input type="text" name="content" id="content" placeholder="Enter a New Task" required>
+        <button type="submit">Add Task</button>
+    </form>
+</div>
+
+
+{% endblock %}
